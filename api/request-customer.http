@@ -1,0 +1,29 @@
+### CREATE CUSTOMER
+POST http://localhost:8800/api/customer
+Content-Type: application/json
+
+{
+    "name": "test",
+    "birthday": "2001-10-16T17:30:00.000+00:00",
+    "gender": "FEMALE",
+    "address": "Ygn",
+    "phoneNumber": "093434646",
+    "favoriteItems": ["Donuts", "Pancakes"]
+}
+
+### UPDATE CUSTOMER 
+PATCH http://localhost:8800/api/customer/6336efb57b7175f48bdfca7f
+Content-Type: application/json
+
+{
+    "name": "updated customer"
+}
+
+### FIND CUSTOMERS BY FAVORITE ITEM
+GET http://localhost:8800/api/customer?favoriteItem=Pancakes
+
+### FIND ALL CUSTOMERS
+GET http://localhost:8800/api/customer?pageSize=10&page=1
+
+### FIND CUSTOMERS BY BITH MONTH
+GET http://localhost:8800/api/customer?month=10

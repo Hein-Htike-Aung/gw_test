@@ -1,0 +1,13 @@
+.topbar {
+  height: 50px;
+  background-color: teal;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+
+  .logo {
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+  }
+}
