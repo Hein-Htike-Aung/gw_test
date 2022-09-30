@@ -124,3 +124,11 @@ export const findCustomers = async (
     next(error);
   }
 };
+
+
+export const find_TodayBirthday_Customer = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+}
