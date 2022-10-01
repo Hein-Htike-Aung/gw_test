@@ -2,6 +2,7 @@ import {
   deleteCustomer,
   findCustomerById,
   findCustomers,
+  find_TodayBirthday_Customers,
   updateCustomer,
 } from "./../controllers/customer.controller";
 import {
@@ -32,5 +33,7 @@ router.delete(
 router.get("/:customerId", findCustomerById);
 
 router.get("", findCustomers);
+
+router.get("/today/birthday", find_TodayBirthday_Customers);
 
 export default router;

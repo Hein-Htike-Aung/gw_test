@@ -1,0 +1,17 @@
+.customerList {
+  .customerListHeader {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .customerListHeaderLeft {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+  }
+
+  .tableWrapper {
+    height: 500px;
+  }
+}

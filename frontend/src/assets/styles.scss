@@ -1,3 +1,5 @@
+@import "./colors.scss";
+
 * {
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
@@ -21,4 +23,38 @@ ul {
 
 .d-none {
   display: none;
+}
+
+@mixin badget {
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.successBadget {
+  background-color: $success-color;
+  cursor: pointer;
+  @include badget();
+}
+
+.lightblueBadget {
+  background-color: $lightblue-color;
+  cursor: pointer;
+  @include badget();
+}
+
+.warnBadget {
+  background-color: $warn-color;
+  cursor: pointer;
+  @include badget();
+}
+
+.lightWarnBadget {
+  background-color: $light-warn-color;
+  cursor: pointer;
+  @include badget();
 }

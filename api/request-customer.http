@@ -27,3 +27,6 @@ GET http://localhost:8800/api/customer?pageSize=10&page=1
 
 ### FIND CUSTOMERS BY BITH MONTH
 GET http://localhost:8800/api/customer?month=10
+
+### FIND TODAY BIRTHDAY CUSTOMERS
+GET http://localhost:8800/api/customer/today/birthday

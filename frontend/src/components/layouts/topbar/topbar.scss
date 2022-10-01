@@ -1,13 +1,36 @@
 .topbar {
   height: 50px;
   background-color: teal;
-  padding-left: 30px;
+  padding: 0 30px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   .logo {
     font-size: 20px;
     font-weight: 300;
     color: white;
+  }
+
+  .notification {
+    position: relative;
+    cursor: pointer;
+    .notiIcon {
+      color: white;
+    }
+    .notificationCount {
+      top: 0;
+      right: -5px;
+      font-size: 12px;
+      height: 15px;
+      width: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 25px;
+      color: white;
+      background-color: red;
+      position: absolute;
+    }
   }
 }

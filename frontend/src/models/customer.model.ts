@@ -1,4 +1,6 @@
 export interface Customer {
+  no?: number;
+  customerId?: string;
   name: string;
   birthday: Date;
   gender: "MALE" | "FEMALE";
@@ -6,3 +8,4 @@ export interface Customer {
   phoneNumber: string;
   favoriteItems: string[];
 }
+

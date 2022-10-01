@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { get } from "lodash";
+import { cond, get } from "lodash";
 import Customer from "../models/cutomer.model";
 
 export const createCustomer = async (
@@ -84,25 +84,22 @@ export const findCustomers = async (
     let condition = {};
 
     if (month) {
-      const [listResult, countResult] = await Promise.all([
-        Customer.find({
-          $expr: {
-            $eq: [{ $month: "$birthday" }, month],
-          },
-        }),
-        Customer.count(condition),
-      ]);
-
-      res.status(200).json({ listResult, countResult });
+      condition = {
+        $expr: {
+          $eq: [{ $month: "$birthday" }, month],
+        },
+      };
     }
     if (favoriteItem) {
       condition = {
+        ...condition,
         favoriteItems: favoriteItem,
       };
-
+    }
+    if (month || favoriteItem) {
       const [listResult, countResult] = await Promise.all([
         Customer.find(condition),
-        Customer.count(condition),
+        Customer.count(),
       ]);
 
       res.status(200).json({ listResult, countResult });
@@ -111,11 +108,11 @@ export const findCustomers = async (
       let _page = (Math.abs(+page!) || 1) - 1;
 
       const [listResult, countResult] = await Promise.all([
-        Customer.find(condition)
+        Customer.find()
           .sort({ _id: -1 })
           .limit(_pageSize)
           .skip(_pageSize * _page),
-        Customer.count(condition),
+        Customer.count(),
       ]);
 
       res.status(200).json({ listResult, countResult });
@@ -125,10 +122,51 @@ export const findCustomers = async (
   }
 };
 
-
-export const find_TodayBirthday_Customer = async (
+export const find_TodayBirthday_Customers = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-}
+  try {
+    const date = new Date();
+    const currentDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
+    const [listResult, countResult] = await Promise.all([
+      Customer.aggregate([
+        {
+          $match: {
+            $expr: {
+              $and: [
+                {
+                  $eq: [
+                    { $dayOfMonth: "$birthday" },
+                    {
+                      $dayOfMonth: currentDate,
+                    },
+                  ],
+                },
+                {
+                  $eq: [
+                    { $month: "$birthday" },
+                    {
+                      $month: currentDate,
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      ]),
+      Customer.count(),
+    ]);
+
+    res.status(200).json({ listResult, countResult });
+  } catch (error) {
+    next(error);
+  }
+};
